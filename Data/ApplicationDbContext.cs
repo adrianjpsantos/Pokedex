@@ -7,6 +7,7 @@ namespace Pokedex.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options){ }
         
+
         public DbSet<Abilities> Abilities { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Generation> Generations { get; set; }
@@ -14,7 +15,57 @@ namespace Pokedex.Data
         public DbSet<PokemonAbilities> PokemonAbilities { get; set; }
         public DbSet<PokemonTypes> PokemonTypes { get; set; }
         public DbSet<Types> Types { get; set; }
-        public DbSet<Weaknessses> Weaknessses { get; set; }
+        public DbSet<Weaknesses> Weaknesses { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            #region Many to Many - PokemonAbilities
+            builder.Entity<PokemonAbilities>().HasKey(
+                pa => new { pa.PokemonNumber, pa.AbilityId }
+            );
+            builder.Entity<PokemonAbilities>()
+                .HasOne(pa => pa.Pokemon)
+                .WithMany(p => p.Abilities)
+                .HasForeignKey(pa => pa.PokemonNumber);
+
+            builder.Entity<PokemonAbilities>()
+                .HasOne(pa => pa.Ability)
+                .WithMany(a => a.PokemonsWithAbility)
+                .HasForeignKey(pa => pa.AbilityId);
+            #endregion
+
+            #region Many to Many - PokemonTypes
+            builder.Entity<PokemonTypes>().HasKey(
+                pt => new { pt.PokemonNumber, pt.TypeId }
+            );
+            builder.Entity<PokemonTypes>()
+                .HasOne(pa => pa.Pokemon)
+                .WithMany(p => p.Types)
+                .HasForeignKey(pa => pa.PokemonNumber);
+
+            builder.Entity<PokemonTypes>()
+                .HasOne(pa => pa.Type)
+                .WithMany(a => a.PokemonsOfThisType)
+                .HasForeignKey(pa => pa.TypeId);
+            #endregion
+
+            #region Many to Many - Weaknesses
+            builder.Entity<Weaknesses>().HasKey(
+                w => new { w.PokemonNumber, w.TypeId }
+            );
+            builder.Entity<Weaknesses>()
+                .HasOne(w => w.Pokemon)
+                .WithMany(p => p.Weaknesses)
+                .HasForeignKey(w => w.PokemonNumber);
+
+            builder.Entity<Weaknesses>()
+                .HasOne(w => w.Type)
+                .WithMany(a => a.PokemonsWithThisWeakness)
+                .HasForeignKey(w => w.TypeId);
+            #endregion
+        }
         
     }
 }

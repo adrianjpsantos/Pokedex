@@ -57,6 +57,6 @@ namespace Pokedex.Models
 
         public ICollection<PokemonAbilities> Abilities { get; set; } = new List<PokemonAbilities>();
         public ICollection<PokemonTypes> Types { get; set; } = new List<PokemonTypes>();
-        public ICollection<Weaknessses> Weaknesses { get; set; } = new List<Weaknessses>();
+        public ICollection<Weaknesses> Weaknesses { get; set; } = new List<Weaknesses>();
     }
 }

@@ -22,7 +22,7 @@ namespace Pokedex.Models
         public string Color { get; set; } = string.Empty;
 
         public ICollection<PokemonTypes> PokemonsOfThisType { get; set; } = new List<PokemonTypes>();
-        public ICollection<Weaknessses> PokemonsWithThisWeakness { get; set; } = new List<Weaknessses>();
+        public ICollection<Weaknesses> PokemonsWithThisWeakness { get; set; } = new List<Weaknesses>();
 
 
     }

@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pokedex.Models
 {
-    [Table("Weaknessses")]
-    public class Weaknessses
+    [Table("Weaknesses")]
+    public class Weaknesses
     {
         [Key, Column(Order = 1)]
         public uint PokemonNumber { get; set; }

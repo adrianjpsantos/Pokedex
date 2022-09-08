@@ -19,6 +19,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewData["Types"] = _context.Types.ToList();
         return View();
     }
 
