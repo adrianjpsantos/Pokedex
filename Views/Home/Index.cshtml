@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Pokemons>
+@{
     ViewData["Title"] = "Home Page";
 }
   <section class="py-5 text-center container">
@@ -13,6 +14,10 @@
       </div>
     </div>
   </section>
+
+  @foreach(var p in Pokemons){
+    @p.Name;
+  }
 
   <div class="album py-5 bg-light">
     <div class="container">

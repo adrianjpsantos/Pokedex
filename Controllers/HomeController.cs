@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pokedex.Models;
 using Pokedex.Data;
+using System.Linq;
 
 namespace Pokedex.Controllers;
 
@@ -20,7 +21,11 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         ViewData["Types"] = _context.Types.ToList();
-        return View();
+        var pokemons = _context.Pokemons
+        .Include(p => p.Types)
+        .ThenInclude(t => t.Type)
+        .ToList();
+        return View(pokemons);
     }
 
     public IActionResult Privacy()
