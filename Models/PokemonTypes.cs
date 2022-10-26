@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,14 +8,13 @@ namespace Pokedex.Models
     {
         [Key, Column(Order = 1)]
         public uint PokemonNumber { get; set; }
-
         [ForeignKey("PokemonNumber")]
-        public Pokemons Pokemon { get; set; } = new();
+        public Pokemons Pokemon { get; set; }
 
         [Key, Column(Order = 2)]
         public uint TypeId { get; set; }
-
         [ForeignKey("TypeId")]
-        public Types Type { get; set; } = new();
+        public Types Type { get; set; } 
     }
 }
+

@@ -13,12 +13,8 @@ namespace Pokedex.Models
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Por favor, Informe o Nome")]
-        [StringLength(20, ErrorMessage = "O Nome deve possuir no máximo 20 caracteres")]
-        public string Name { get; set; } = string.Empty;
-
-        [Display(Name = "Mídia")]
-        [Required(ErrorMessage = "Por favor, Informe a Mídia")]
-        [StringLength(1, ErrorMessage = "A Mídia deve possuir no máximo 1 caracter")]
-        public string Color { get; set; } = string.Empty;
+        [StringLength(30, ErrorMessage = "O Nome deve possuir no máximo 30 caracteres")]
+        public string Name { get; set; } 
     }
 }
+

@@ -13,17 +13,16 @@ namespace Pokedex.Models
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Por favor, Informe o Nome")]
-        [StringLength(30, ErrorMessage = "O Nome deve possuir no máximo 30 caracteres")]
-        public string Name { get; set; } = string.Empty;
+        [StringLength(30, ErrorMessage = "O Nome do Tipo deve possuir no máximo 30 caracteres")]
+        public string Name { get; set; } 
 
         [Display(Name = "Cor de Exibição")]
-        [Required(ErrorMessage = "Por favor, Informe a Cor")]
+        [Required(ErrorMessage = "Informe a Cor")]
         [StringLength(7, ErrorMessage = "A Cor deve possuir no máximo 7 caracteres")]
-        public string Color { get; set; } = string.Empty;
+        public string Color { get; set; } 
 
-        public ICollection<PokemonTypes> PokemonsOfThisType { get; set; } = new List<PokemonTypes>();
-        public ICollection<Weaknessses> PokemonsWithThisWeakness { get; set; } = new List<Weaknessses>();
-
-
+        public ICollection<PokemonTypes> PokemonsOfThisType { get; set; } 
+        public ICollection<Weaknesses> PokemonsWithThisWeakness { get; set; } 
     }
 }
+
