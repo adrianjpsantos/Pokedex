@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Pokedex.Models;
 
@@ -8,16 +5,15 @@ namespace Pokedex.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options){ }
+        
 
         public DbSet<Abilities> Abilities { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Generation> Generations { get; set; }
         public DbSet<Pokemons> Pokemons { get; set; }
-        public DbSet<PokemonAbilities> PokemonsAbilities { get; set; }
-        public DbSet<PokemonTypes> PokemonsTypes { get; set; }
+        public DbSet<PokemonAbilities> PokemonAbilities { get; set; }
+        public DbSet<PokemonTypes> PokemonTypes { get; set; }
         public DbSet<Types> Types { get; set; }
         public DbSet<Weaknesses> Weaknesses { get; set; }
 
@@ -45,14 +41,14 @@ namespace Pokedex.Data
                 pt => new { pt.PokemonNumber, pt.TypeId }
             );
             builder.Entity<PokemonTypes>()
-                .HasOne(pt => pt.Pokemon)
+                .HasOne(pa => pa.Pokemon)
                 .WithMany(p => p.Types)
-                .HasForeignKey(pt => pt.PokemonNumber);
+                .HasForeignKey(pa => pa.PokemonNumber);
 
             builder.Entity<PokemonTypes>()
-                .HasOne(pt => pt.Type)
-                .WithMany(t => t.PokemonsOfThisType)
-                .HasForeignKey(pt => pt.TypeId);
+                .HasOne(pa => pa.Type)
+                .WithMany(a => a.PokemonsOfThisType)
+                .HasForeignKey(pa => pa.TypeId);
             #endregion
 
             #region Many to Many - Weaknesses
@@ -66,9 +62,10 @@ namespace Pokedex.Data
 
             builder.Entity<Weaknesses>()
                 .HasOne(w => w.Type)
-                .WithMany(t => t.PokemonsWithThisWeakness)
+                .WithMany(a => a.PokemonsWithThisWeakness)
                 .HasForeignKey(w => w.TypeId);
             #endregion
         }
+        
     }
 }
